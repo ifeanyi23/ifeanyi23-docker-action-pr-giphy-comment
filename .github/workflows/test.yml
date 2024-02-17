@@ -1,0 +1,23 @@
+name: Test Docker Actions
+
+on:
+    pull_request: 
+        types: 
+            - opened
+
+jobs:
+    testing-action:
+        name: Testing Docker Action
+        runs-on: ubuntu-latest
+        permissions:
+            issues: write
+            pull-requests: write
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Post PR Comment
+              uses: ./
+              with:
+                github-token: ${{secrets.GITHUB_TOKEN}}
+                giphy-api-key: ${{secrets.GIPHY_API_KEY}}
