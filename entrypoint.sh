@@ -21,7 +21,7 @@ gif_url=$(echo "$giphy_response" | jq --raw-output .data.images.downsized.url)
 echo GIPHY_URL - $gif_url
 
 # Create a comment with the GIF on the pull request
-username="${github_actor%%[0-9]*}"
+username=$(echo "$github_actor" | sed 's/[0-9]*//g')
 
 comment_response=$(curl -sX POST \
   -H "Accept: application/vnd.github.v3+json" \
