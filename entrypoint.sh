@@ -3,7 +3,6 @@
 #Get the Github Token and Giphy API key from Gith Action Inputs
 GITHUB_TOKEN=$1
 GIPHY_API_KEY=$2
-github_actor = $GITHUB_ACTOR
 
 # Get the pull request number from the Github event payload
 
@@ -21,7 +20,7 @@ gif_url=$(echo "$giphy_response" | jq --raw-output .data.images.downsized.url)
 echo GIPHY_URL - $gif_url
 
 # Create a comment with the GIF on the pull request
-username=$(echo "$github_actor" | sed 's/[0-9]*//g')
+username=$(echo "$GITHUB_ACTOR" | sed 's/[0-9]*//g')
 
 comment_response=$(curl -sX POST \
   -H "Accept: application/vnd.github.v3+json" \
